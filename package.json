@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/AlfredKai/slack-backupper/issues"
   },
-  "homepage": "https://github.com/AlfredKai/slack-backupper#readme"
+  "homepage": "https://github.com/AlfredKai/slack-backupper#readme",
+  "dependencies": {
+    "date-and-time": "^1.0.0",
+    "save": "^2.4.0"
+  }
 }
