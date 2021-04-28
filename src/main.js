@@ -14,8 +14,8 @@ async function saveChannelInfo(channelId) {
   try {
     const data = await fetchChannelInfo(channelId, Config.Token);
     const channelName = data.channel.name || data.channel.user;
-    dir = `${Config.Output}/${Config.Workspace}/${channelName}`;
-    fs.mkdirSync(dir);
+    dir = `${Config.Output}/${Config.Workspace}/channels/${channelName}`;
+    await fsPromises.mkdir(dir, { recursive: true });
     fsPromises.writeFile(`${dir}/channel-info.txt`, JSON.stringify(data, null, 2));
   } catch (e) {
     console.log('saveChannelInfo', e);
