@@ -4,7 +4,7 @@ const path = require('path');
 const delay = require('./util/delay');
 const Config = require('./config');
 
-const PATH = `${Config.output}/${Config.Workspace}`;
+const PATH = `${Config.Output}/${Config.Workspace}`;
 
 function filter(url) {
   if (url && url.includes('avatars.slack-edge.com')) {

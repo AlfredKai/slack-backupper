@@ -3,7 +3,7 @@ const fsPromises = fs.promises;
 const fetchUserList = require('./api/slack-user-list');
 const Config = require('./config');
 
-const PATH = `${Config.output}/${Config.Workspace}/user-list.txt`;
+const PATH = `${Config.Output}/${Config.Workspace}/user-list.txt`;
 
 async function saveUserList() {
   try {

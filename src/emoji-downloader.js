@@ -6,7 +6,7 @@ const delay = require('./util/delay');
 const Config = require('./config');
 const saveEmojis = require('./save-emoji-list');
 
-const PATH = `${Config.output}/${Config.Workspace}`;
+const PATH = `${Config.Output}/${Config.Workspace}`;
 
 (async function () {
   await saveEmojis();

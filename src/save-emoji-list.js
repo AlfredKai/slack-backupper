@@ -3,7 +3,7 @@ const fsPromises = fs.promises;
 const fetchEmojiList = require('./api/slack-emoji-list');
 const Config = require('./config');
 
-const PATH = `${Config.output}/${Config.Workspace}/emoji-list.txt`;
+const PATH = `${Config.Output}/${Config.Workspace}/emoji-list.txt`;
 
 async function saveEmojiList() {
   try {
