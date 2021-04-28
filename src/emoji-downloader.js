@@ -6,18 +6,18 @@ const delay = require('./util/delay');
 const Config = require('./config');
 const saveEmojis = require('./save-emoji-list');
 
-const PATH = `${Config.Output}/${Config.Workspace}`;
+const DIR = `${Config.Output}/${Config.Workspace}/emojis`;
 
 (async function () {
   await saveEmojis();
 
-  let data = await fsPromises.readFile(`${PATH}/emoji-list.txt`);
+  let data = await fsPromises.readFile(`${DIR}/emoji-list.txt`);
   data = JSON.parse(data);
   const emojis = data.emoji;
-  fs.mkdirSync(`${PATH}/emojis`);
+  await fsPromises.mkdir(`${DIR}/emojis`, { recursive: true });
   for (const key in emojis) {
     if (new URL(emojis[key]).protocol === 'alias:') continue;
-    const file = fs.createWriteStream(`${PATH}/emojis/${path.basename(emojis[key])}`);
+    const file = fs.createWriteStream(`${DIR}/emojis/${path.basename(emojis[key])}`);
     https.get(emojis[key], function (response) {
       response.pipe(file);
     });
