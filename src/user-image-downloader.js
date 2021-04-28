@@ -4,10 +4,13 @@ const fsPromises = fs.promises;
 const path = require('path');
 const delay = require('./util/delay');
 const Config = require('./config');
+const saveUsers = require('./save-user-list');
 
 const DIR = `${Config.Output}/${Config.Workspace}`;
 
 (async function () {
+  await saveUsers();
+
   let data = await fsPromises.readFile(`${DIR}/user-list.txt`);
   data = JSON.parse(data);
   await fsPromises.mkdir(`${DIR}/user-images`, { recursive: true });
