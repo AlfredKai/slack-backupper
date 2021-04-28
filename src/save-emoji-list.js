@@ -8,7 +8,7 @@ const PATH = `${Config.Output}/${Config.Workspace}/emoji-list.txt`;
 async function saveEmojiList() {
   try {
     const data = await fetchEmojiList(Config.Token);
-    fsPromises.writeFile(PATH, JSON.stringify(data, null, 2));
+    await fsPromises.writeFile(PATH, JSON.stringify(data, null, 2));
   } catch (e) {
     console.log('saveEmojiList', e);
   }
