@@ -73,11 +73,13 @@ async function saveMessages(channelId, latestTs) {
         }
         cursor = data.response_metadata.next_cursor;
       } catch (e) {
-        console.log('fuck you', e);
+        // probably be ECONNRESET
+        console.error(e);
+        console.log('retry...');
       }
     }
   } catch (e) {
-    console.log('saveMessages', e);
+    console.error('saveMessages', e);
   }
   console.log('save messages completed:', dir);
 }
