@@ -8,6 +8,7 @@ const PATH = `${Config.Output}/${Config.Workspace}/user-list.txt`;
 async function saveUserList() {
   try {
     const data = await fetchUserList(Config.Token);
+    if (!data.ok) throw Error(data.error);
     await fsPromises.writeFile(PATH, JSON.stringify(data, null, 2));
   } catch (e) {
     console.log('saveUserList', e);

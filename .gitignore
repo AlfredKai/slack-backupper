@@ -1,8 +1,9 @@
 # Dependency directories
 node_modules/
 
-# Config
-config.js
+# Env
+.env
+env.bat
 
 # Output
 Output
