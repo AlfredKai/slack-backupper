@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/AlfredKai/slack-backupper#readme",
   "dependencies": {
+    "commander": "^8.2.0",
     "date-and-time": "^1.0.0",
     "save": "^2.4.0"
   }
