@@ -11,15 +11,12 @@ const fsPromises = fs.promises;
 let dir;
 
 async function saveChannelInfo(channelId) {
-  try {
-    const data = await fetchChannelInfo(channelId, Config.Token);
-    const channelName = data.channel.name || data.channel.user;
-    dir = `${Config.Output}/${Config.Workspace}/channels/${channelName}`;
-    await fsPromises.mkdir(dir, { recursive: true });
-    fsPromises.writeFile(`${dir}/channel-info.txt`, JSON.stringify(data, null, 2));
-  } catch (e) {
-    console.log('saveChannelInfo', e);
-  }
+  const data = await fetchChannelInfo(channelId, Config.Token);
+  console.log(`fetch channel data: ${JSON.stringify(data, null, 2)}`);
+  const channelName = data.channel.name || data.channel.user;
+  dir = `${Config.Output}/${Config.Workspace}/channels/${channelName}`;
+  await fsPromises.mkdir(dir, { recursive: true });
+  fsPromises.writeFile(`${dir}/channel-info.txt`, JSON.stringify(data, null, 2));
 }
 
 async function saveMessages(channelId, latestTs) {
@@ -35,6 +32,7 @@ async function saveMessages(channelId, latestTs) {
         const data = await fetchHistory(channelId, Config.Token, cursor, false, latestTs);
         latestTs = null;
         if (!data.ok) {
+          // TODO: retry only when reaching rate limiting
           console.warn('retry fetchHistory', data);
           continue;
         }
@@ -84,10 +82,12 @@ async function saveMessages(channelId, latestTs) {
   console.log('save messages completed:', dir);
 }
 
-(async function () {
-  const channels = ['aaa', 'bbb', 'ccc'];
+const saveChannelMessages = async function (channelIds) {
+  const channels = channelIds.split(',');
   for (const channel of channels) {
     await saveChannelInfo(channel);
     await saveMessages(channel);
   }
-})();
+};
+
+module.exports = saveChannelMessages;

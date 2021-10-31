@@ -4,7 +4,7 @@ async function fetchHistory(channelId, token, cursor, inclusive, latest) {
   const cursorQuery = cursor ? `&cursor=${cursor}` : '';
   const inclusiveQuery = inclusive ? `&inclusive=${inclusive}` : '';
   const latestQuery = latest ? `&latest=${latest}` : '';
-  const data = await request(
+  return await request(
     `https://slack.com/api/conversations.history?channel=${channelId}${cursorQuery}${inclusiveQuery}${latestQuery}`,
     {
       method: 'GET',
@@ -13,7 +13,6 @@ async function fetchHistory(channelId, token, cursor, inclusive, latest) {
       },
     }
   );
-  return JSON.parse(data);
 }
 
 module.exports = fetchHistory;

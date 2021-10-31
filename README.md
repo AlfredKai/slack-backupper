@@ -30,22 +30,32 @@ Use slack web app and get it from url.
 
 ## Permission Scopes
 
-For user list you need:
+To save user list you need:
 
-- user:read
+- users:read
+
+To save emoji list you need:
+
+- emoji:read
+
+To save messages you need:
+If you use `Bot Token` for private channel (scope `groups:history`), you have to add the bot to the channel first.
+
+- channels:read
+- groups:read
+- mpim:read
+- im:read
+- channels:history
+- groups:history
+- mpim:history
+- im:history
 
 ## Usage
 
-```js
-node src/save-emoji
-```
+Windows
 
 ```js
-node src/save-user-list
-```
-
-```js
-node src/save-messages
+call env.bat && node src/main.js [command]
 ```
 
 files:
@@ -66,5 +76,4 @@ Put your OAuth token in `Authorization` HTTP header instead of query string or y
 
 ## TODO
 
-- missing scope error
-- use commander
+- no workspace folder error
